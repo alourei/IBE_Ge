@@ -1,0 +1,40 @@
+
+
+#ifndef IBEEventAction_h
+#define IBEEventAction_h 1
+
+#include "G4UserEventAction.hh"
+#include "globals.hh"
+
+class IBERunAction;
+//class EventActionMessenger;
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+class IBEEventAction : public G4UserEventAction
+{
+public:
+  IBEEventAction(IBERunAction*);
+  virtual ~IBEEventAction();
+
+  void  BeginOfEventAction(const G4Event*);
+  void    EndOfEventAction(const G4Event*);
+    
+  void AddPlasticBeta(G4double de) {EnergyBeta += de;};
+  void AddPlasticGamma(G4double de) {EnergyGamma += de;};
+                       
+  void SetPrintModulo(G4int    val)  {printModulo = val;};
+    
+private:
+   IBERunAction*  runAct;
+   
+  G4double  EnergyBeta,EnergyGamma;
+  
+  G4int     printModulo;
+                             
+  //EventActionMessenger*  eventMessenger;
+};
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+#endif
